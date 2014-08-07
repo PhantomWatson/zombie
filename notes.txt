@@ -1,0 +1,687 @@
+TO DO
+	Joke: Women's restrooms are like floral-scented clown cars
+	Joke: Good thing you wore your +1 Cargo Pants of Holding today
+	Zombie player: Can only go to the bar and eat the bartender 
+	Vomiting in-combat: Go directly to zombie attack, place vomiting message between pic and "OW!" text
+	Flask drinking / pill popping:
+		- During combat, clicking the drink/pop button immediately loads 
+		zombie-hit or zombie-miss screen, with imbibing text between 
+		picture and normal "you got bit" message.
+		- Out of combat, button just updates sidebar, maybe invokes JS effects,
+		and perhaps has a popup window with a description of your action 
+	Bottle-dropping-from-VIP-room
+		First time player decides to approach the restrooms, 
+			they stop, observe zombie in window with beer bottle, 
+			and are presented with button "walk under the window anyway"
+		From then on, 1pt of damage every time the player walks to or from the restroom without a helmet
+		If player has an empty beer bottle, player can try to peg the zombie for damage (can actually kill the zombie)
+		If player tries to ascend the ladder, 
+			if zombie is distracted by a head thrown through the window, player enters VIP room
+			otherwise, "are you sure?" confirmation, ten zombie claws at player for damage and player falls down
+	Mortal Kombat
+		Beating it gives +5% to your to-hit chance, and having the top score gives all attacks +1 damage
+		$gamestate->arcade_player_id is set when you beat the game or die and enter your initials
+		Database keeps track of all IDs, names, and scores
+		If arcade_player_id equals top scoring ID, attacks are at +1 damage
+		Then some sort of message indicating when top score is achieved / lost
+			"You feel inspired" / "You feel crestfallen" 
+	Derby Girls:
+		If player chooses not to save Derby Girl, 
+			VIDEO: Zombie Derby Girl eats Derby Girl, then immediately runs at player. Player ends up in
+			correct position for combat with zombie, with Derby Girl not in frame.
+		If player chooses to save Derby Girl and Zombie Lurker is alive
+			Player fights Zombie Derby Girl, who dies normally. Player then looks over to observe
+			Zombie Lurker eating Derby Girl.
+	
+	
+	In-game to-do list
+	End-of-combat "Hey, you're really hurt. You should drink more booze." message
+	Alternatives to YouTube (to avoid advertising): http://kareltests.co.uk/
+	Buy bruise wheel
+	Take a design cue from http://runforyourlives.com/
+	Fancy vector graphics with Paper.js?
+	Parallaxy front page (jQuery example: https://github.com/cameronmcefee/plax)
+	Help page uses CSS3 accordion example from http://www.red-team-design.com/css3-accordion
+	Post-TWBMSW-learning recap
+	Incremental narration:
+		All sections are given class="split_narration"
+		CSS makes first-child visible, others not
+		Script adds button to end of each section (except last), applies IDs, and manually hides/shows
+	
+	"Talk to bartender" and "Order a drink" should be distinctly different actions
+	Test to make sure that cookies are enabled.
+	Transition idea: 
+		Have old content slide up and away as new content slides up and in view,
+		like each chunk of the narration is getting added to the bottom of a stack
+	Scanned map drawn on bar napkin
+	Buffer all JS
+	Bar napkin map that shows arrows when player mouses over navigation buttons 
+	To-hit chance modifiers for each zombie (difficulty levels)
+	Switch scriptaculous animations to CSS transitions where possible
+	Mouseover effects for buttons
+	Animated health bar (green flash) when drinking
+	"Zombie killed" effect:
+		Half-opaque PNG of a wave of blood gets slid down over zombie image
+		Then zombie image fades to black a bit
+	
+	Stuff is being dropped down the ladder, derby helmet needed to climb it
+
+	http://www.brainyquote.com/quotes/keywords/death_3.html
+	Switch to jQuery and use jRumble? http://jackrugile.com/jrumble/
+	For every action, make sure that player should be able to perform it
+	Instead of looting a corpse being a separate action, make it happen automatically when the zombie
+		dies, if it hasn't already been looted
+	The 'OW' background image needs to be enabled and disabled, because its color and the background
+		color apparently don't match up in all browsers
+	More dramatic player death. Screen fades to black.
+	Beta version numbers in header
+	Require JS (don't bother with non-JS degradation) and create warning if JS isn't enabled
+		Same with cookies
+	Switch animations to CSS transitions
+	Blood spray (red periods {as in full stops}) inspired by http://www.zachstronaut.com/posts/2009/12/21/happy-xmas-winternet.html
+	Investigate -webkit-font-smoothing
+	'Ow' background effect is really faint in Chrome (interference between JS and CSS transition?)
+	Make sure most recent versions of Prototype and Scriptaculous are being used
+	Set up Google Analytics before going live
+	Use Modernizr (http://www.modernizr.com/) on front page to tell user what important browser capabilities they're missing and recommend other browsers
+	
+PLOT / MECHANICS IDEAS
+	Burpies can be suppressed with an antacid (or Pepto Bismal or something?)
+	Implement flask (found back behind the stage?)
+	Plot twist: The bartender created the zombie outbreak and then needed you to
+		help once it got out of hand.
+	
+	Punch:
+	Kick:
+	TWBMSW:
+	Hammer(ed)-fist: Drunken, low-to-hit, high-damage version of punch
+	Quarter punch: Upgrade to punch, player holds roll of quarters
+	Pool cue: Slightly better than a kick, but breaks after a few whacks
+		
+REFERENCES
+	Image crossfade: 
+		http://css3.bradshawenterprises.com/cfimg/
+	Whiteboard tutorial: 
+		http://cristian.nexcess.net/ajax/whiteboard/
+		http://www.cristiandarie.ro/ajax-php/PDFs/1825_whiteboard_Final.pdf	
+
+EACH REQUEST (to /play)
+
+	If POST data provided
+		POST data passed to "default method" for the selected zone, Zone::{$zone}()
+		That method calls action-specific 
+		
+	If no POST data provided
+		Get current zone from cookie and invoke  
+
+EACH ROUND OF COMBAT
+	(player and zombie health bars float fixed to left and right of center content column)
+	Combat buttons presented. Player chooses an action.
+	Result determined, pic / message / js command set (js command 
+	If zombie dead, death message set
+	If zombie alive, zombie attack attempted, pic / message / js command set
+	If player dead, game over message set
+	If player alive, combat buttons presented
+
+PROCEDURE: ADDING COMBAT
+	Update Game::getAllEnemies()
+	Update Game::getCombatIntro()
+	Update Game::getPlayerAttackPic()
+	Update Game::getZombieAttackPic()
+	Update Game::getZombieDeathMessage()
+	Update Game::getZombieDeathPic()
+	Update Game::getLoot()
+	Update zone-specific method in GameController
+		combat & loot
+	Create loot view
+
+ZONES (zones are IN BOLD, actions are "in quotes")
+	POOL_TABLES (one is out of order)
+		ELSEWHERE is RESTROOMS, BASEMENT, FRONT_ZONES, LADDER, TABLES (if not fully searched)
+		Links to
+			"Put 50 cents into the pool table"
+			"Steal the cue ball" (if not already stolen)
+			ELSEWHERE
+		
+		"Put 50 cents into the machine"
+			You ain't got enough money! (if that's... you know, true)
+			Balls drop (if not stolen)
+			Balls don't drop and you wonder why you did that (if stolen)
+			Links to
+				"Play a solo game of pool"
+				"Steal all of the balls"
+			
+		"Steal the cue ball"
+			Links to
+				"Put 50 cents into the machine"
+				ELSEWHERE
+		
+		"Steal all of the balls"
+			Links to
+				"Put 50 cents into the machine"
+				"Steal the cue ball" (if not stolen)
+				ELSEWHERE
+		
+		"Play a solo game of pool"
+			Play without cueball (if cueball already stolen)
+			Play with cueball (if cueball and balls not stolen)
+			How do you expect to play? (if balls stolen)
+			Links to
+				"Put 50 cents into the machine"
+				"Steal the cue ball" (if not stolen)
+				ELSEWHERE
+	
+PERSONNEL
+  PHOTO SHOOT CAST
+	Stephanie Phillips	Bartender
+	Emily Wuertemberger	Derby girl
+	Jessi Irwin			Derby Zombie
+	Jason Smith			Barfly
+	Ryan Mast			Comedian
+	Meghan McAdams		Soundbooth
+	Wes Titus			Wheelchair
+	Elsa				Zombie Child				
+	Mary Ogle			Backstage corpse
+	Adam Fisher			Comedy Fan
+	Jestina Bankert		Hippie
+  PHOTO SHOOT CREW
+  	Graham Watson		Director
+  	Mary Ogle			Assistant Director
+  	Heather Haywood		Video
+  	Cherish Nicole		Photo
+  	Gypsy				Makeup
+	Graham Watson		Effects	
+
+
+	
+   Availability
+	Matt Hagan: After the 15th
+	Ryan Mast: Tuesdays after 8pm
+	Gypsy: 
+		July 19, August 2, 9, 23, 30 all day
+		July 26 and August 16 until 3:30pm
+	Emily: Not July 19 or 26, "latter half of August may be sketchy"
+	Zim: After 7pm
+	Heather: Might not be available before 11pm
+	
+   August 2nd photo shoot
+	Confirmations: Wes, Emily, Heather, Matt, Cherish, Kimi, Jessie
+	Sort of confirmations: Jestina, Zim
+	No word from Tim, Kat Molitor
+
+MEDIA IDEAS
+	Videos of the introduction of each zombie
+	Pictures of player drawing dicks on the men's restroom wall and on dead men's room zombie's face	
+	
+BAR PURCHASES
+	$3 shot heals 5 pts 	(60 cents per point)
+	$2.50 beer heals 4 pts 	(62.5 cents per point)
+	$1 tip: Bartender gives the player a hint/tip "Thanks for the tip! Now here's one for you: ..."
+		Strategy hints: 
+			Hey, Mike hates vegetables. Like the kind on these pizzas.
+			Why not steal pool balls and eff up some zombies with them?
+		Opening up new actions: 
+			How to turn on the Mortal Kombat machine
+			How to turn on soothing house music to make the zombies chill out (zombie attacks are less successful)
+		Each hint is given once, possibly only at a particular point in the game.
+		If all hints possible at the current gamestate have been given, 
+			bartender just says "Thanks"
+			OR gives zombie trivia or tells a zombie joke
+		"Insert quarter to continue"
+
+TWBMSW MECHANICS
+	Once you learn the TWBMSW, you can use it in combat, but only when drunk.
+		"Just like bowling and threesomes, there's no way you're going to be able to do this right sober." 
+	Each use of it "spends" 0.045 BAC. ("a shot and a half")
+		"You'll find that when you pull it off, you'll actually sober up a bit. As you spin around, the blood rushes through your liver so quickly that it immediately filters a bunch of the alcohol out of your bloodstream." 
+	Chance of success diminishes with drunkenness. Something like:
+		<  0.125	0% (not buzzed enough)
+		>= 0.125	100% - (BAC - 0.125) * 300
+			so 0.15 -> 92.5% and 0.2 -> 77.5% and 0.25 -> 62.5% and .4 -> 17.5%
+		>=  0.4583	0% (way too drunk)
+DRUNK MECHANICS
+	The drunker the player is,
+		text color is closer to background
+		fade-ins are slower
+		text is fuzzy (same color glow)
+		buttons wobble
+		
+		> .15 BAC
+		the content area is tilted and tilt is altered by a random walk
+		(BAC * 100) - 15 = absolute value of boundaries of tilt (maybe add something like a 1.25 multiplier to that)
+			so at BAC .2, tilt is -5 to +5 degrees
+			   at BAC .4, tilt is -35 to +35 degrees
+
+	Drunkenness is lowered by
+		Successfully performing a TWBMSW (-0.04 BAC)
+		Accidentally vomiting during a combat (-0.03 BAC)
+			if BAC > .16, chance = (100% * BAC) that attack is replaced by vomiting
+			"You feel a little less drunk."
+		Finishing a combat (-0.002?)
+		Drinking coffee ($1, -0.02)
+	
+	Drunk critical hit
+		In combat, if attack is successful and BAC > 0.1,
+		10% + (BAC * 10) chance of "DRUNK POWER!" critical hit that doubles damage
+			So for BAC 0.15, chance is 11.5%
+	
+	BAC ranges, effects		
+		0.00  - 0.03
+		0.04+			Can use TWBMSW
+		0.10+			Can get critical hits
+		0.10  - 0.15	Can get criticals but won't vomit
+		0.16+	   		Might vomit in combat
+	
+	Some combat moves require a certain BAC
+	
+	Entering some "scary" zones requires a certain BAc
+
+SPENDING EXPERIENCE:
+	After every X combats, a point can be spent to...
+		Increase an attack's damage by 1pt (max of two additional points per attack)
+		Increase an attack's accuracy by 5%
+		Increase dodge chance by 5%
+		Increase HP by 1pt
+		
+
+STATS / MERITS
+	Courage -> Lifts "you have to be drunk to go into that scary place" restriction
+	Alcohol tolerance (multiple levels?) -> BAC displays the same, but lowers effective BAC in drunk-status and all effects 
+	Employment -> Raises starting money
+	Gym membership -> Raises HP
+	Scrapper -> Raises to-hit percents by 5%
+	Bullied -> Adds "flashback" critical hits that increase damage done
+	Dancer -> Increases dodge percentage
+	
+	CHARACTER ASPECTS
+		One can be improved for free. More can be improved if flaws are taken.
+		Health
+			Scrawny:	18 HP
+			Normal:		20 HP
+			Buff:		22 HP
+		To-hit chance
+			Uncoordinated:	-5%
+			Normal:			+0%
+			Skilled:		+5%
+		Starting money
+			Broke:			$0
+			Normal:			$5
+			Employed:		$10
+		Alcohol tolerance (effective BAC for negative effects and drunk-status messages)
+			Lightweight:	120% of BAC
+			Normal:			100% of BAC	
+			Irish:			 80% of BAC	
+		Temper (hits required to freak out)
+			Buddhist:		12
+			Normal:			10
+			Short fuse:		 8
+
+		Dodge?
+		
+		Courage?
+		
+		
+		Character archetypes suggested to the player:
+			Nerd:	+Money, -Health, +Temper
+			"Your smarts have gotten you through school and into a great job, but you're still haunted by memories of bullies giving you swirlies."
+			
+--- --- Limericks --- ---
+There was a young lady of Ealing,
+And her lover before her was kneeling.
+She said, 'Dearest Jim,
+Take your hand off my quim;
+I much prefer fucking to feeling.' 
+ - QueenOfMistakes
+
+There was a man named Stan
+Romancing a woman in his van
+They began to undress
+and before she confessed
+he learned she was a man
+ - Minion of Cthulhu
+
+I have a dear friend named Maybel
+Who does dealing under the table.
+She a bit of a slob,
+But the best at her job-
+For she swallows whenever she's able. 
+ - nullandvoid
+
+There once was a young man from Brighton
+Who cried to his girl, "You're a tight one!"
+She said, "'pon my soul-
+You're in the wrong hole,
+There's plenty of room in the right one!" 
+- nullandvoid
+
+There once was a woman named Alice
+Who used a dynamite stick for a phallus
+They found her vagina
+In North Carolina
+And asshole in Buckingham Palace
+- Joe Francia
+
+There once was a fellow named Frisk,
+Whose stroke was exceedingly brisk.
+So fast was his action,
+That the Lorenz contraction,
+Reduced his tool to a disk!
+- Quidam Viator
+
+There once was a girl named Dot
+Who lived off of pig shit and snot
+When she ran out of these
+She ate the bleu cheese
+That she scraped from the sides of her twat 
+- Spirit Crusher
+
+There once was a man from Gosham
+Who took out his bollocks to wash 'em
+His wife said "Jack
+if you don't put 'em back
+I'll step on the bastards and squash 'em"
+- Power_13
+
+There once was a young man from Kent,
+Who's cock was so long that it bent
+To save himself trouble,
+He put it in double
+And instead of coming, he went. 
+- AlphaDog
+
+The once was a cop with some gumption,
+Who lost his own cock at a luncheon,
+And decieved his young wife,
+For the rest of her life,
+With the aid of his constable's truncheon. 
+- AlphaDog
+
+There was once a young fellow named Shane
+Who liked whacking off with a cane
+So much fun did he have
+Ripping skin off his sav
+That it drove the poor bugger insane 
+- Coupon Wizard
+
+A poofter who lived in Khartoum
+Took a lesbian up to his room,
+They argued all night
+Over who had the right
+To do what, and with which, and to whom.
+- AlphaDog
+
+There once was a man from Nantucket
+Who went to hell in a bucket
+And when he got there
+The Devil asked for his fare
+So he whipped out his dick and said 'suck it'
+- EZipperelli
+
+There once was a fellow McSweeney
+Who spilled some sloe gin on his weenie
+Just to be couth
+He added vermouth
+Then slipped his girlfriend a martini 
+- Andy Saxon
+
+There once was a man from Nantucket
+Whose dick was so long he could suck it.
+He said, with a grin,
+As he wiped off his chin,
+"If my ear was a cunt, then I'd fuck it."
+- Leovinus
+
+A pirate, history relates
+Was scuffling with some of his mates
+He slipped on a cutlass
+Which rendered him nutless
+And practically useless on dates 
+- Slide Rule
+
+There was a young plumber of Leigh
+Was plumbing a maid by the sea.
+Said the maid, "Cease your plumbing;
+I think someone's coming."
+Said the plumber, still plumbing, "It's me." 
+- CerealCrunch
+
+There once was a fellow named Dave
+Who found an old whore in a cave
+She was ugly as shit
+And missing one tit
+But think of the money he'll save!
+- OilSlick
+
+There was a young fellow named Hass,
+whose bollocks were made out of brass
+when they tinkled together
+they played "Stormy Weather"
+and lightning shot out of his ass. 
+- ChlamydiaJones
+
+There once was a woman named Jill
+Who swallowed an exploding pill
+They found her vagina
+In North Carolina
+And her tits in a tree in Brazil 
+- Slide Rule
+
+There was a young woman from France
+Who thought she'd take a chance
+She let herself go
+For an hour or so
+And now all her sisters are aunts 
+- Aaron A Aardvark
+
+There once was a fellow named Brown
+Who was the nastiest bastard around
+He was caught by the G-men
+Shooting his semen
+So the cops would slip and fall down
+- Kung Food
+
+There once was a hooker named Sue
+Who filled her pussy with glue
+So for their sin
+The Johns paid to get in
+And pay to get out of her too
+- Andy Saxon
+
+This is my friend John Issacs
+Who's balls are of different sizes
+One is so small
+It is nothing at all
+And the other has won many prizes 
+- Kung Food
+
+A mathematician named Hall,
+Had a hexahadronical ball.
+The cube of it's weight,
+Times pi squared, plus eight,
+Was two thirds of three fifths of fuck all. 
+- AlphaDog
+
+A man, enterprising from Blunt
+Proposed an incredible stunt
+He's propelled so high
+The cannon up nigh
+He'd end up knee deep in her cunt.
+- Slide Rule
+
+There once was a vampire named Mable
+Who's periods were always quite stable
+And every full moon,
+She'd pull out a spoon
+And drink herself under the table.
+- Beer_Suitcase
+
+There once was a lady from Ryde
+Who ate a green apple and died
+The apple fermented
+Inside the lamented
+And made cider inside her insides
+- Super Waffle
+
+There once was a man named Enis
+A spaceman who travelled to Venus
+He said with a stutter
+get out of the gutter
+this poem is not about a penis. 
+- D is That Guy
+
+The horse owner, Bartleby Fife,
+Was given the shock of his life
+When he went to the shed
+And found, to his dread,
+That the jockey was riding his wife.
+- Grope-A-Matic
+
+There once was a hooker named Harriet
+Whom customers rode like a chariot
+When fooling around,
+She'd act like a hound;
+She'd lick off a bone--and then bury it. 
+- Grope-A-Matic
+
+There once was a man from Stamboul
+Who soliloquized thus to his tool:
+You took all my wealth
+And you ruined my health
+And now you won't pee you old fool 
+- Stultus Maximus
+
+There was a young lady from Venus,
+whose body was shaped like a penis.
+A fellow named Hunt
+was shaped like a cunt,
+so it all worked out fine, just between us. 
+- Jenova Project
+
+A trollop who worked up at Yale
+Had her price list tattooed on her tail.
+Just above her behind
+As an aid to the blind
+Was a duplicate schedule in Braille. 
+- CrowsNestMutineer
+
+She frowned and called him Mr.
+Because in fun he kr.
+And so in spite,
+That very night,
+This Mr. kr. sr.
+- Kenning
+
+There was an old lady from China,
+Who had an enormous vagina.
+When she was dead,
+They painted it red,
+and used it for docking a liner.
+- Quidam Viator
+
+There was a lady from Norway
+Who hung by her toes in the doorway.
+She said to her beau,
+"Just look at me, Joe!
+I think I've discovered one more way." 
+- Aggro
+
+There once was a fellow O'Doole
+Who found little red spots on his tool
+His Doctor a cynic
+said Get out of me clinic,
+And wipe off that lipstick you fool!
+- Andy Saxon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- --- Old, pre-RPG-style ideas below --- ---
+
+BACKEND
+	Don't bother with anti-cheating mechanics
+	Various parts are in iframes, so various URLs are not visible
+		in-iframe layout reloads the whole page if not in iframe (e.g. if a link is opened in a new window)
+		var isInIFrame = (window.location != window.parent.location) ? true : false;
+	Saved in cookie:
+		Items in inventory
+		Flags
+		Current location	(e.g. bar)
+		Current location-state (0 = first interaction, >0 for in the middle of an interaction)
+	Action
+		Each link is to /:location_id/:action_id, and is routed to pages/play
+		pages/play calls appropriate location/action method
+		Takes current location and state and directs to a location-specific method
+		Method returns appropriate $this->render()
+	Invisible timer for various time-delay effects, incremented by "significant actions"
+	First floor, front-door barricade has strength of 50
+		decremented every turn
+		increased by adding barricades
+		barricade-chomping delayed by 20 turns if a cat on the second floor is caught and tossed out the front window
+		At zero, the zombies break into the first floor and kill everyone there
+	Ten turns later, zombies try to break into basement and second floor
+		Delayed by barricades placed there
+	Ten turns later, zombies try to get onto roof
+	
+		
+
+PLOT
+	IMPETUS
+	Unstoppable horde at door, will break in after 50 turns
+	
+	ZOMBIES
+	Zombie in men's restroom
+	Zombie by back door
+	Zombie at bar
+	
+	ITEMS
+	(Downstairs)
+	Machete in women's restroom
+	Bartender can make one zombie poison drink
+		If carried, can be thrown at a zombie to kill it
+		If drank, allows player to belch during combat (once) and kill zombie
+	Cue ball
+	Quarters (in Mortal Kombat machine)
+	Set of pool balls (if quarters acquired)
+		"You manage to cram all fifteen balls in your pants. Better not let these spill out all over the place, or someone might trip on them. Hmm..."
+	
+	(Upstairs)
+	Cat
+	Pole and string
+	
+	(Basement)
+	Net - "Maybe you could use this net to trap the zombies trying to get in! 
+		Or at least distract them while you beat them to shit with barstools or something. 
+		But those zombies move pretty fast. You'd need a way to slow them down before a net's
+		going to do any good."
+		
+	PLOT POINTS
+	(Upstairs)
+	When finding pole and string, option: make a makeshift fishing pole
+	When at front window
+		with cat, option: throw cat out window (distracts zombies for 10 turns)
+		with fishing pole and cat, option: lower cat down (removes fishing pole and cat from inventory, distracts zombies for 20 turns, then they eat it and the pole)
+			with cat lowered, 	option: drop cat (zombie-distraction set to 10)
+								option: swing the cat over to in front of the Heorot (relocates the zombies for 20 turns, during which you can escape, then they return)
+								option: bring cat back up (moves cat and FP into inventory, zombies go back to door)
+		with fishing pole and NO cat, "If only there were something you could do to distract them from the door."
+		with pole and string, option: make a makeshift fishing pole
+		
+    (Downstairs)
+    At front door:
+    	"Those zombies are banging at the door, and it's only a matter of time until they break in. 
+    	There's no way that the people inside stand a chance if they get in. Unless if they could be contained, somehow."
+    At front door, option: unlock the door (zombies break in immediately)
+    At front door with set of pool balls, option: lay pool balls down on floor
+    	At front door with balls on floor, option: pick pool balls back up

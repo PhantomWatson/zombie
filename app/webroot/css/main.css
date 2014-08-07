@@ -1,0 +1,132 @@
+@CHARSET "ISO-8859-1";
+
+/* GENERAL */
+a {color: #00BF08; text-decoration: none;}
+a:hover {text-decoration: underline;}
+
+/* GENERAL LAYOUT */
+#wrapper {margin: auto; width: 810px;}
+#wrapper_tilt {transition: transform 10s; -moz-transition: -moz-transform 10s; -webkit-transition: -webkit-transform 10s; -o-transition: -o-transform 10s; -webkit-transform: translateZ(0);}
+#wrapper_scale {transition: all 10s; -moz-transition: all 10s; -webkit-transition: all 10s; -o-transition: all 10s; -webkit-transform: translateZ(0);}
+#content {float: left; width: 600px;}
+#content img {border: 1px solid #2F5F34; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
+#header {background-color: black; position: fixed; top: 0; width: 100%; z-index: 2;}
+#header .inner {margin: auto; width: 600px;}
+#masthead {text-align: center; letter-spacing: 5px; font-size: 30px; padding: 5px 0;}
+body, html {margin: 0; padding: 0;}
+body {
+	background-color: #202F21; color: #A7DF99; font-family: 'Yanone Kaffeesatz', arial, serif; 
+	font-size: 150%; padding-top: 90px; padding-bottom: 100px;
+}
+#debug_readout {font-family: Arial; font-size: 10pt;}
+
+/* SIDEBAR */
+#sidebar {color: #94C487; float: right; width: 200px;}
+#sidebar > div {background-color: #041F06; border: 1px solid #2F5F34; font-size: 75%; margin-bottom: 10px; padding: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
+#sidebar .header {border-bottom: 1px solid #2F5F34; clear: both; color: #A7DF99; font-size: 25px; font-weight: normal; margin: 0;}
+.health > div {}
+.health .bar {border: 1px solid white; float: right; height: 10px; margin-top: 13px; width: 120px;}
+.health .numbers {color: #6B8C62; float: right; font-size: 70%;}
+.health .message {padding-left: 20px;}
+.health .remaining {background-color: white; height: 100%;}
+#bac_status {font-size: 60%;}
+#bac_descriptor_wrapper {overflow: hidden;}
+#bac_descriptor {padding-left: 20px;}
+#bac .header span {transition: all 1s; -moz-transition: all 1s; -webkit-transition: all 1s; -o-transition: all 1s;}
+#inventory {}
+#inventory span {}
+#inventory ul {font-size: 100%; list-style-type: circle; margin: 0; padding-left: 20px;}
+#inventory .sidenote {font-size: 80%; color: #75996B;}
+#options .header {cursor: pointer;}
+#options input[type=submit], #options input[type=button] {font-family: 'Yanone Kaffeesatz';}
+#player_health .message_wrapper {overflow: hidden; transition: height 1s; -moz-transition: height 1s; -webkit-transition: height 1s; -o-transition: height 1s;}
+#zombie_health .message_wrapper {overflow: hidden; transition: height 1s; -moz-transition: height 1s; -webkit-transition: height 1s; -o-transition: height 1s;}
+acronym {cursor: default;}
+
+/* INTERFACE */
+input[type=submit], input[type=button] {font-family: 'IM Fell DW Pica SC', arial, serif; font-size: 100%; padding: 0;} /* previously used 'Walter Turncoat' */
+.button_panel {width: 100%;}
+.button_panel thead {font-weight: lighter; font-size: 80%; text-align: center;}
+.button_panel td {text-align: center;}
+.button_panel tbody td:first-child {text-align: left;}
+hr.here_elsewhere {width: 50%;}
+form {text-align: center;}
+#order_a_drink {text-align: center;}
+.footnote {font-size: 80%;}
+#you_monster, #your_mother {color: red; text-align: center; text-transform: uppercase; text-shadow: 0 0 0; visibility: hidden;}
+
+/* COMBAT */
+p.zombie_killed {color: #fff; font-size: 150%; margin-top: 0; text-align: center;}
+p.player_killed {color: #fff; font-size: 150%; text-align: center;}
+
+/* NARRATION */
+span.loot {color: white; text-transform: uppercase;}
+span.new_attack {color: white; text-transform: uppercase;}
+span.damage_dealt {color: lime; font-weight: bold; text-transform: uppercase;}
+span.damage_taken {color: red; font-weight: bold; text-transform: uppercase;}
+span.trailing_off {font-size: 80%;}
+q {color: white;}
+div.fake_pic {border: 1px solid #FFF; display: block; height: 250px; width: 600px; margin: 0 auto 25px; text-align: center; padding-top: 200px;}
+em {margin-right: 4px;} /* corrects weirdness with 'Yanone Kaffeesatz' italics */
+p {margin: 0 0 25px 0;} 
+section.split_narration {filter: alpha(opacity=0); height: 0; opacity: 0; overflow: hidden; position: absolute; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; width: 602px; z-index: 0;}
+section.sn_current {z-index: 1; height: auto; opacity: 1; filter: alpha(opacity=100);}
+section.sn_prev {}
+.next_wrapper {text-align: center;}
+.buttons {text-align: center;}
+#drinks p {text-align: left;}
+
+/* DRUNK EFFECTS */
+.blurries_enabled .drunk_text_0 {}
+.blurries_enabled .drunk_text_1 {} /* was text-shadow: 0px 0px 0.02em #A7DF99; */
+.blurries_enabled .drunk_text_2 {text-shadow: 0px 0px 0.1em #A7DF99;}
+.blurries_enabled .drunk_text_3 {text-shadow: 2px 2px 0.5em #A7DF99;}
+.blurries_enabled .drunk_text_4 {text-shadow: 2px 2px 0.5em #A7DF99, 5px 5px 0.3em #A7DF99;}
+.blurries_enabled .drunk_text_5 {text-shadow: 2px 2px 0.5em #A7DF99, 10px 5px 0.1em #A7DF99;}
+.blurries_enabled .drunk_text_6 {text-shadow: 2px 2px 0.9em #A7DF99, 15px 5px 0.09em #A7DF99;}
+.blurries_enabled .drunk_text_7 {text-shadow: 2px 2px 0.9em #A7DF99, 15px 10px 0.07em #A7DF99;}
+.blurries_enabled .drunk_text_8 {text-shadow: 2px 2px 0.9em #A7DF99, 10px -10px 0.1em #A7DF99, -20px -100px 0.5em #A7DF99;}
+.blurries_enabled .drunk_text_9 {text-shadow: 2px 2px 0.9em #A7DF99, 50px -30px 0.06em #A7DF99, -50px 40px 0.1em #A7DF99, -20px -100px 0.5em #A7DF99, 20px 150px 0.9em #A7DF99;}
+.blurries_enabled .drunk_text_10 {text-shadow: 2px 2px 0.9em #A7DF99, 50px -30px 0.06em #A7DF99, -50px 40px 0.1em #A7DF99, -20px -100px 0.5em #A7DF99, 20px 150px 0.9em #A7DF99, 500px 10px 0.3em #A7DF99, -400px 200px 2em #A7DF99;}
+.wobblies_enabled .drunk_tilt_4a	{transform: rotate(0.3deg); -webkit-transform: rotate(0.3deg); -o-transform: rotate(0.3deg); -moz-transform: rotate(0.3deg);}
+.wobblies_enabled .drunk_tilt_4b	{transform: rotate(-0.3deg); -webkit-transform: rotate(-0.3deg); -o-transform: rotate(-0.3deg); -moz-transform: rotate(-0.3deg);}
+.wobblies_enabled .drunk_tilt_5a	{transform: rotate(0.35deg); -webkit-transform: rotate(0.35deg); -o-transform: rotate(0.35deg); -moz-transform: rotate(0.35deg);}
+.wobblies_enabled .drunk_tilt_5b	{transform: rotate(-0.35deg); -webkit-transform: rotate(-0.35deg); -o-transform: rotate(-0.35deg); -moz-transform: rotate(-0.35deg);}
+.wobblies_enabled .drunk_tilt_6a	{transform: rotate(0.4deg); -webkit-transform: rotate(0.4deg); -o-transform: rotate(0.4deg); -moz-transform: rotate(0.4deg);}
+.wobblies_enabled .drunk_tilt_6b	{transform: rotate(-0.4deg); -webkit-transform: rotate(-0.4deg); -o-transform: rotate(-0.4deg); -moz-transform: rotate(-0.4deg);}
+.wobblies_enabled .drunk_tilt_7a	{transform: rotate(0.5deg); -webkit-transform: rotate(0.5deg); -o-transform: rotate(0.5deg); -moz-transform: rotate(0.5deg);}
+.wobblies_enabled .drunk_tilt_7b	{transform: rotate(-0.5deg); -webkit-transform: rotate(-0.5deg); -o-transform: rotate(-0.5deg); -moz-transform: rotate(-0.5deg);}
+.wobblies_enabled .drunk_tilt_8a	{transform: rotate(0.7deg); -webkit-transform: rotate(0.7deg); -o-transform: rotate(0.7deg); -moz-transform: rotate(0.7deg);}
+.wobblies_enabled .drunk_tilt_8b	{transform: rotate(-0.7deg); -webkit-transform: rotate(-0.7deg); -o-transform: rotate(-0.7deg); -moz-transform: rotate(-0.7deg);}
+.wobblies_enabled .drunk_tilt_9a	{transform: rotate(0.9deg); -webkit-transform: rotate(0.9deg); -o-transform: rotate(0.9deg); -moz-transform: rotate(0.9deg);}
+.wobblies_enabled .drunk_tilt_9b	{transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg); -o-transform: rotate(-0.9deg); -moz-transform: rotate(-0.9deg);}
+.wobblies_enabled .drunk_tilt_10a	{transform: rotate(2.0deg); -webkit-transform: rotate(2.0deg); -o-transform: rotate(2.0deg); -moz-transform: rotate(2.0deg);}
+.wobblies_enabled .drunk_tilt_10b	{transform: rotate(-2.0deg); -webkit-transform: rotate(-2.0deg); -o-transform: rotate(-2.0deg); -moz-transform: rotate(-2.0deg);}
+.wobblies_enabled .drunk_scale_n4 {transform: scale(0.80); -webkit-transform: scale(0.80); -o-transform: scale(0.80); -moz-transform: scale(0.80);}
+.wobblies_enabled .drunk_scale_n3 {transform: scale(0.85); -webkit-transform: scale(0.85); -o-transform: scale(0.85); -moz-transform: scale(0.85);}
+.wobblies_enabled .drunk_scale_n2 {transform: scale(0.90); -webkit-transform: scale(0.90); -o-transform: scale(0.90); -moz-transform: scale(0.90);}
+.wobblies_enabled .drunk_scale_n1 {transform: scale(0.95); -webkit-transform: scale(0.95); -o-transform: scale(0.95); -moz-transform: scale(0.95);}
+.wobblies_enabled .drunk_scale_0  {transform: scale(1.00); -webkit-transform: scale(1.00); -o-transform: scale(1.00); -moz-transform: scale(1.00);}
+.wobblies_enabled .drunk_scale_1  {transform: scale(1.05); -webkit-transform: scale(1.05); -o-transform: scale(1.05); -moz-transform: scale(1.05);}
+.wobblies_enabled .drunk_scale_2  {transform: scale(1.10); -webkit-transform: scale(1.10); -o-transform: scale(1.10); -moz-transform: scale(1.10);}
+.wobblies_enabled .drunk_scale_3  {transform: scale(1.15); -webkit-transform: scale(1.15); -o-transform: scale(1.15); -moz-transform: scale(1.15);}
+.wobblies_enabled .drunk_scale_4  {transform: scale(1.20); -webkit-transform: scale(1.20); -o-transform: scale(1.20); -moz-transform: scale(1.20);}
+#wrapper_tilt.stop_wobblies {
+	transition: transform 1s; -moz-transition: -moz-transform 1s; -webkit-transition: -webkit-transform 1s; -o-transition: -o-transform 1s;
+	transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);
+}
+#wrapper_scale.stop_wobblies {
+	transition: all 1s; -moz-transition: all 1s; -webkit-transition: all 1s; -o-transition: all 1s;
+	transform: scale(1); -webkit-transform: scale(1); -o-transform: scale(1); -moz-transform: scale(1);
+}
+
+/* DEBUG */
+#debug_readout div {background-color: #041F06; border: 1px solid #2F5F34; font-size: 75%; margin-bottom: 10px; padding: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
+
+/* slightly enhanced, universal clearfix hack */
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0;}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
